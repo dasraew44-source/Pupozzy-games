@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полная энциклопедия: Деревья нашей планеты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-green: #1b5e20;
+            --secondary-green: #2e7d32;
+            --light-green: #4caf50;
+            --pale-green: #c8e6c9;
+            --accent-brown: #8d6e63;
+            --accent-gold: #ffb300;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9fbe7 0%, #e8f5e9 50%, #f1f8e9 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header с навигацией */
+        header {
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(27, 94, 32, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header-content {
+            padding: 40px 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('https://images.unsplash.com/photo-1462143338528-eca9936a4d09?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 20px 20px 0;
+        }
+        
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.6rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        .nav-tab {
+            padding: 12px 25px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        /* Основные секции */
+        .section {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-green), var(--light-green));
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-green);
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--pale-green);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h2 i {
+            color: var(--light-green);
+            background-color: var(--pale-green);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        /* Улучшенная галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .artwork {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+            position: relative;
+            height: 280px;
+        }
+        
+        .artwork img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .artwork:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .artwork:hover img {
+            transform: scale(1.15);
+        }
+        
+        .artwork-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: var(--white);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .artwork:hover .artwork-caption {
+            transform: translateY(0);
+        }
+        
+        /* Расширенные свойства */
+        .properties-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1100px) {
+            .properties-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .property-card {
+            background-color: #f9fdf8;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 6px solid var(--light-green);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .property-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-green), var(--light-green));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .property-card:hover::after {
+            transform: translateX(0);
+        }
+        
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.15);
+        }
+        
+        .property-title {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .property-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .property-details {
+            color: var(--accent-brown);
+            font-size: 0.95rem;
+            font-style: italic;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+        }
+        
+        /* Диаграмма свойств */
+        .properties-chart {
+            background-color: #f9fdf8;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            text-align: center;
+        }
+        
+        .chart-bar {
+            margin-bottom: 20px;
+        }
+        
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .chart-bar-bg {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--light-green), var(--secondary-green));
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        
+        /* Интерактивная модель */
+        .interactive-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1200px) {
+            .interactive-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .tree-model-container {
+            background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
+            border-radius: 15px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tree {
+            position: relative;
+            width: 150px;
+            height: 400px;
+            transition: all 0.5s ease;
+        }
+        
+        .trunk {
+            width: 40px;
+            height: 200px;
+            background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .foliage {
+            position: absolute;
+            width: 220px;
+            height: 200px;
+            background: radial-gradient(circle at 50% 0%, var(--light-green), var(--secondary-green));
+            border-radius: 50% 50% 40% 40%;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .control-group {
+            background-color: #f9fdf8;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .control-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider-container {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--light-green);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .season-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .season-btn {
+            padding: 15px;
+            background-color: #e8f5e9;
+            border: none;
+            border-radius: 10px;
+            color: var(--primary-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .season-btn.active {
+            background: linear-gradient(to right, var(--light-green), var(--secondary-green));
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .season-btn:hover:not(.active) {
+            background-color: #c8e6c9;
+            transform: translateY(-3px);
+        }
+        
+        .season-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Расширенные факты */
+        .facts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .fact-card {
+            background-color: #f9fdf8;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border-top: 5px solid var(--light-green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--light-green), var(--primary-green));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .fact-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .fact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fact-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-green);
+            background-color: var(--pale-green);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        .fact-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+        
+        /* Новые разделы */
+        .tree-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .type-card {
+            background-color: #f9fdf8;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #e8f5e9;
+        }
+        
+        .type-card:hover {
+            border-color: var(--light-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .type-icon {
+            font-size: 2.5rem;
+            color: var(--light-green);
+            margin-bottom: 15px;
+        }
+        
+        .type-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .type-examples {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .timeline {
+            position: relative;
+            margin-top: 30px;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-green), var(--light-green));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--light-green);
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 3px var(--light-green);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(27, 94, 32, 0.3);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Анимации и эффекты */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .hidden {
+            opacity: 0;
+        }
+        
+        /* Кнопка наверх */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            background-color: var(--secondary-green);
+            transform: translateY(-5px);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section {
+                padding: 30px;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                padding: 30px 25px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .season-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                justify-content: center;
+            }
+        }
+        
+        /* Дополнительные элементы */
+        .info-box {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 6px solid var(--accent-gold);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-title {
+            font-size: 1.4rem;
+            color: var(--accent-brown);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 215, 0, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--accent-brown);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок с навигацией -->
+        <header>
+            <div class="header-bg"></div>
+            <div class="header-content">
+                <h1><i class="fas fa-tree"></i> Полная энциклопедия: Деревья нашей планеты</h1>
+                <p class="subtitle">Исследуйте удивительный мир деревьев через интерактивные модели, расширенные галереи, детальные свойства и уникальные факты о самых удивительных растениях Земли.</p>
+                
+                <div class="nav-tabs">
+                    <div class="nav-tab active" data-target="gallery">Галерея</div>
+                    <div class="nav-tab" data-target="properties">Свойства</div>
+                    <div class="nav-tab" data-target="interactive">3D Модель</div>
+                    <div class="nav-tab" data-target="facts">Интересные факты</div>
+                    <div class="nav-tab" data-target="types">Виды деревьев</div>
+                    <div class="nav-tab" data-target="timeline">История развития</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Секция галереи -->
+        <section class="section animated" id="gallery">
+            <h2><i class="fas fa-palette"></i> Галерея деревьев в искусстве</h2>
+            <p>Деревья всегда были источником вдохновения для художников всех эпох. Их мощь, красота и изменчивость в зависимости от сезона запечатлены на полотнах великих мастеров.</p>
+            
+            <div class="gallery">
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Лесной пейзаж">
+                    <div class="artwork-caption">
+                        <h3>«Утро в сосновом лесу»</h3>
+                        <p>Иван Шишкин, 1889. Масло, холст. Хранится в Третьяковской галерее.</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Осенний лес">
+                    <div class="artwork-caption">
+                        <h3>«Золотая осень»</h3>
+                        <p>Исаак Левитан, 1895. Масло, холст. Хранится в Третьяковской галерее.</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Летний лес">
+                    <div class="artwork-caption">
+                        <h3>«Дубовая роща»</h3>
+                        <p>Иван Шишкин, 1887. Масло, холст. Хранится в Русском музее.</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Зимний лес">
+                    <div class="artwork-caption">
+                        <h3>«Зима в лесу»</h3>
+                        <p>Игорь Грабарь, 1900-е. Масло, холст. Хранится в Русском музее.</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Цветущий сад">
+                    <div class="artwork-caption">
+                        <h3>«Цветущие яблони»</h3>
+                        <p>Клод Моне, 1873. Масло, холст. Хранится в музее Орсе, Париж.</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Тропический лес">
+                    <div class="artwork-caption">
+                        <h3>«Тропический лес»</h3>
+                        <p>Анри Руссо, 1907. Масло, холст. Хранится в музее Орсе, Париж.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title"><i class="fas fa-info-circle"></i> Интересно знать</div>
+                <p>В искусстве деревья часто выступают символами: <span class="highlight">дуб</span> символизирует силу и долголетие, <span class="highlight">ива</span> — печаль и гибкость, <span class="highlight">береза</span> — чистоту и свет, <span class="highlight">сосна</span> — стойкость и вечность.</p>
+            </div>
+        </section>
+        
+        <!-- Секция свойств -->
+        <section class="section animated hidden" id="properties">
+            <h2><i class="fas fa-seedling"></i> Биологические свойства и особенности</h2>
+            <p>Деревья — сложные организмы с уникальными биологическими механизмами, позволяющими им выживать в различных условиях и играть ключевую роль в экосистемах.</p>
+            
+            <div class="properties-container">
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-leaf"></i> Фотосинтез</h3>
+                        <p class="property-description">Процесс преобразования углекислого газа и воды в глюкозу и кислород под воздействием солнечного света. Хлорофилл в листьях поглощает световую энергию.</p>
+                        <div class="property-details">Одно взрослое дерево производит около 100-120 кг кислорода в год, что достаточно для дыхания 2-3 человек.</div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-water"></i> Транспирация</h3>
+                        <p class="property-description">Испарение воды через устьица листьев, которое помогает дереву охлаждаться и создает локальный микроклимат вокруг него.</p>
+                        <div class="property-details">Крупное дерево может испарить до 400-500 литров воды в сутки, повышая влажность воздуха вокруг себя на 5-10%.</div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-ring"></i> Годичные кольца</h3>
+                        <p class="property-description">Концентрические круги на срезе ствола, образующиеся из-за разной скорости роста весной и летом. Показывают возраст и условия роста.</p>
+                        <div class="property-details">По кольцам можно определить не только возраст, но и климатические условия, пожары, засухи и даже извержения вулканов.</div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-network-wired"></i> Корневая система</h3>
+                        <p class="property-description">Сложная подземная структура, обеспечивающая стабильность, поглощение воды и минералов. Может превышать размер кроны в 2-3 раза.</p>
+                        <div class="property-details">Корни некоторых деревьев образуют симбиоз с грибами (микоризу), что увеличивает площадь поглощения в 100 раз.</div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-shield-alt"></i> Защитные механизмы</h3>
+                        <p class="property-description">Деревья вырабатывают фитонциды, смолы, танины и алкалоиды для защиты от вредителей, болезней и травоядных животных.</p>
+                        <div class="property-details">Некоторые виды могут выделять химические сигналы для предупреждения соседних деревьев об атаке вредителей.</div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <h3 class="property-title"><i class="fas fa-recycle"></i> Симбиоз</h3>
+                        <p class="property-description">Взаимовыгодные отношения с грибами (микориза), бактериями, насекомыми и другими организмами, улучшающие выживаемость.</p>
+                        <div class="property-details">Дерево получает воду и минералы, а грибы — углеводы. Некоторые деревья делятся питательными веществами с соседями через грибные сети.</div>
+                    </div>
+                </div>
+                
+                <div class="properties-chart">
+                    <div class="chart-title">Сравнительные характеристики деревьев</div>
+                    
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>Высота роста</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" data-width="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>Продолжительность жизни</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" data-width="92"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>Устойчивость к болезням</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" data-width="78"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>Эффективность фотосинтеза</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" data-width="88"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>Экологическая ценность</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" data-width="95"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Интерактивная модель -->
+        <section class="section animated hidden" id="interactive">
+            <h2><i class="fas fa-gamepad"></i> Интерактивная 3D модель дерева</h2>
+            <p>Изучите, как меняется дерево в зависимости от сезона и других факторов. Используйте элементы управления для изменения параметров и наблюдайте за изменениями в реальном времени.</p>
+            
+            <div class="interactive-section">
+                <div class="tree-model-container">
+                    <div class="tree" id="tree-model">
+                        <div class="trunk" id="tree-trunk"></div>
+                        <div class="foliage" id="tree-foliage"></div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-title"><i class="fas fa-ruler-vertical"></i> Параметры дерева</div>
+                        
+                        <div class="slider-container">
+                            <label for="height-control">Высота дерева: <span id="height-value">400px</span></label>
+                            <input type="range" id="height-control" min="250" max="550" value="400">
+                        </div>
+                        
+                        <div class="slider-container">
+                            <label for="foliage-control">Густота листвы: <span id="foliage-value">200px</span></label>
+                            <input type="range" id="foliage-control" min="120" max="280" value="200">
+                        </div>
+                        
+                        <div class="slider-container">
+                            <label for="trunk-control">Толщина ствола: <span id="trunk-value">40px</span></label>
+                            <input type="range" id="trunk-control" min="20" max="60" value="40">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-title"><i class="fas fa-calendar-alt"></i> Сезоны года</div>
+                        <p>Выберите сезон, чтобы увидеть, как меняется дерево в разное время года.</p>
+                        
+                        <div class="season-selector">
+                            <button class="season-btn active" data-season="spring">
+                                <i class="fas fa-seedling season-icon"></i>
+                                <span>Весна</span>
+                            </button>
+                            <button class="season-btn" data-season="summer">
+                                <i class="fas fa-sun season-icon"></i>
+                                <span>Лето</span>
+                            </button>
+                            <button class="season-btn" data-season="autumn">
+                                <i class="fas fa-leaf season-icon"></i>
+                                <span>Осень</span>
+                            </button>
+                            <button class="season-btn" data-season="winter">
+                                <i class="fas fa-snowflake season-icon"></i>
+                                <span>Зима</span>
+                            </button>
+                        </div>
+                        
+                        <div id="season-description" style="margin-top: 15px; padding: 15px; background-color: #f1f8e9; border-radius: 10px;">
+                            <strong>Весна:</strong> дерево пробуждается, появляются почки и первые листья. Начинается активное сокодвижение. Цветение многих видов привлекает насекомых-опылителей.
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-title"><i class="fas fa-chart-line"></i> Статистика модели</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.8rem; color: var(--primary-green); font-weight: bold;">≈ 250 000</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light);">листьев на дереве</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.8rem; color: var(--primary-green); font-weight: bold;">≈ 15 000 л</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light);">воды в год</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.8rem; color: var(--primary-green); font-weight: bold;">≈ 120 кг</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light);">кислорода в год</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.8rem; color: var(--primary-green); font-weight: bold;">≈ 1 000 кг</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light);">CO₂ поглощает</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Интересные факты -->
+        <section class="section animated hidden" id="facts">
+            <h2><i class="fas fa-lightbulb"></i> Удивительные факты о деревьях</h2>
+            <p>Деревья хранят множество удивительных секретов и рекордов, которые поражают воображение и демонстрируют их невероятные способности к адаптации и выживанию.</p>
+            
+            <div class="facts-container">
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-mountain"></i></div>
+                    <h3>Самое высокое дерево</h3>
+                    <p>Гиперион — секвойя вечнозелёная высотой 115,92 м, растущая в национальном парке Редвуд, Калифорния. Обнаружен в 2006 году.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-history"></i></div>
+                    <h3>Самое старое дерево</h3>
+                    <p>Мафусаил — сосна остистая возрастом около 4850 лет, растущая в Калифорнии. Старше египетских пирамид.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3>Самое широкое дерево</h3>
+                    <p>Дерево Туле — таксодиум мексиканский, диаметр ствола которого составляет около 14 метров. Для его обхвата нужно 30 человек.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-book"></i></div>
+                    <h3>Деревья общаются</h3>
+                    <p>Через "древесный интернет" — микоризную сеть — деревья обмениваются питательными веществами и предупреждают друг друга об опасности.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-temperature-high"></i></div>
+                    <h3>Деревья охлаждают города</h3>
+                    <p>Одно взрослое дерево охлаждает воздух так же эффективно, как 10 комнатных кондиционеров, работающих 20 часов в сутки.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-weight-hanging"></i></div>
+                    <h3>Невероятный вес</h3>
+                    <p>Гигантская секвойя "Генерал Шерман" весит около 2000 тонн — это самое тяжелое живое существо на Земле.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-water"></i></div>
+                    <h3>Дерево-насос</h3>
+                    <p>Некоторые эвкалипты могут поднимать до 500 литров воды в сутки из глубины 30 метров и более.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-fire"></i></div>
+                    <h3>Огнестойкость</h3>
+                    <p>Кора секвойи может достигать толщины 60 см и содержит танины, делающие ее огнестойкой.</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title"><i class="fas fa-brain"></i> Интеллект растений</div>
+                <p>Современные исследования показывают, что деревья обладают своего рода "интеллектом": они могут учиться, запоминать, принимать решения и даже считать. Деревья одного вида узнают "родственников" и помогают им, а конкурирующим видам — нет.</p>
+            </div>
+        </section>
+        
+        <!-- Виды деревьев -->
+        <section class="section animated hidden" id="types">
+            <h2><i class="fas fa-list"></i> Основные виды деревьев</h2>
+            <p>Деревья классифицируются по различным признакам: типу листвы (лиственные/хвойные), климатическим зонам, особенностям роста и другим характеристикам.</p>
+            
+            <div class="tree-types">
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-tree"></i></div>
+                    <div class="type-name">Хвойные</div>
+                    <div class="type-examples">Сосна, ель, пихта, кедр, лиственница, кипарис. Сохраняют листву (хвою) круглый год.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-leaf"></i></div>
+                    <div class="type-name">Лиственные</div>
+                    <div class="type-examples">Дуб, берёза, клён, бук, ясень, тополь. Сбрасывают листву на зиму.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-tint"></i></div>
+                    <div class="type-name">Влаголюбивые</div>
+                    <div class="type-examples">Ива, ольха, тополь, эвкалипт. Растут вблизи водоёмов и в заболоченной местности.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-sun"></i></div>
+                    <div class="type-name">Засухоустойчивые</div>
+                    <div class="type-examples">Акация, саксаул, баобаб, некоторые виды сосен. Приспособлены к жизни в засушливых регионах.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-mountain"></i></div>
+                    <div class="type-name">Горные</div>
+                    <div class="type-examples">Кедровый стланик, горная сосна, карликовая берёза. Растут в высокогорных районах.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <div class="type-name">Тропические</div>
+                    <div class="type-examples">Махагони, тик, палисандр, бразильский орех, каучуковое дерево.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-apple-alt"></i></div>
+                    <div class="type-name">Плодовые</div>
+                    <div class="type-examples">Яблоня, груша, вишня, слива, персик, абрикос, цитрусовые.</div>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon"><i class="fas fa-industry"></i></div>
+                    <div class="type-name">Промышленные</div>
+                    <div class="type-examples">Дуб (мебель), сосна (строительство), берёза (фанера), эвкалипт (бумага).</div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title"><i class="fas fa-globe-americas"></i> Географическое распространение</div>
+                <p>Деревья покрывают примерно 30% поверхности суши Земли. Наибольшая площадь лесов находится в России, Бразилии, Канаде, США и Китае. Тропические леса Амазонии являются "легкими планеты", производя около 20% всего кислорода.</p>
+            </div>
+        </section>
+        
+        <!-- История развития -->
+        <section class="section animated hidden" id="timeline">
+            <h2><i class="fas fa-hourglass-half"></i> История развития деревьев на Земле</h2>
+            <p>Деревья появились на Земле сотни миллионов лет назад и прошли долгий эволюционный путь, адаптируясь к изменяющимся условиям планеты.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 385 млн лет назад</div>
+                    <div class="timeline-content">Появление первых древовидных растений — археоптерисов. Эти примитивные деревья достигали высоты 8-10 метров и не имели настоящих листьев.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 300 млн лет назад</div>
+                    <div class="timeline-content">Каменноугольный период — расцвет древних лесов из гигантских плаунов, хвощей и папоротников. Их остатки образовали залежи каменного угля.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 200 млн лет назад</div>
+                    <div class="timeline-content">Появление первых хвойных деревьев в мезозойскую эру. Эти растения лучше приспособились к сухому климату.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 140 млн лет назад</div>
+                    <div class="timeline-content">Появление первых цветковых (покрытосеменных) деревьев. Это стало эволюционным прорывом, позволившим эффективно размножаться с помощью насекомых-опылителей.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 65 млн лет назад</div>
+                    <div class="timeline-content">После вымирания динозавров начинается расцвет современных лиственных деревьев. Они быстро занимают освободившиеся экологические ниши.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 2 млн лет назад</div>
+                    <div class="timeline-content">Начало ледниковых периодов. Многие виды деревьев вымирают, другие мигрируют к экватору или адаптируются к холоду.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">~ 10 000 лет назад</div>
+                    <div class="timeline-content">После окончания последнего ледникового периода начинается распространение современных лесных массивов. Формируются основные лесные зоны планеты.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">Наше время</div>
+                    <div class="timeline-content">Деревья продолжают эволюционировать, приспосабливаясь к изменению климата и деятельности человека. Ученые выделяют около 60 000 видов деревьев.</div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title"><i class="fas fa-exclamation-triangle"></i> Современные угрозы</div>
+                <p>Сегодня деревья сталкиваются с беспрецедентными угрозами: вырубка лесов, изменение климата, загрязнение окружающей среды, распространение вредителей и болезней. Ежегодно уничтожается около 15 миллиардов деревьев, что угрожает биологическому разнообразию и стабильности экосистем.</p>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <h3 style="font-size: 2rem; margin-bottom: 20px;">Деревья — основа жизни на Земле</h3>
+                <p class="footer-text">Эта расширенная презентация создана для глубокого изучения удивительного мира деревьев — самых долгоживущих, самых крупных и самых важных для экосистемы организмов нашей планеты.</p>
+                <p class="footer-text">Деревья не только производят кислород и поглощают углекислый газ, но и стабилизируют почву, регулируют водный цикл, предоставляют среду обитания для миллионов видов и оказывают положительное влияние на психическое здоровье человека.</p>
+                <p class="footer-text">Берегите деревья — они наши верные союзники в борьбе за сохранение жизни на Земле!</p>
+                
+                <div class="copyright">
+                    © 2023 Полная энциклопедия: Деревья нашей планеты | Создано с помощью HTML, CSS и JavaScript | Все изображения взяты из открытых источников
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Кнопка наверх -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Навигация между разделами
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const sections = document.querySelectorAll('.section');
+        
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                
+                // Убираем активный класс у всех вкладок
+                navTabs.forEach(t => t.classList.remove('active'));
+                // Добавляем активный класс текущей вкладке
+                this.classList.add('active');
+                
+                // Скрываем все секции
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                    section.classList.remove('animated');
+                });
+                
+                // Показываем целевую секцию
+                const targetSection = document.getElementById(targetId);
+                targetSection.classList.remove('hidden');
+                setTimeout(() => {
+                    targetSection.classList.add('animated');
+                }, 10);
+                
+                // Прокрутка к секции
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Элементы управления интерактивной моделью
+        const heightControl = document.getElementById('height-control');
+        const foliageControl = document.getElementById('foliage-control');
+        const trunkControl = document.getElementById('trunk-control');
+        const heightValue = document.getElementById('height-value');
+        const foliageValue = document.getElementById('foliage-value');
+        const trunkValue = document.getElementById('trunk-value');
+        const treeModel = document.getElementById('tree-model');
+        const treeTrunk = document.getElementById('tree-trunk');
+        const treeFoliage = document.getElementById('tree-foliage');
+        const seasonButtons = document.querySelectorAll('.season-btn');
+        const seasonDescription = document.getElementById('season-description');
+        
+        // Управление высотой дерева
+        heightControl.addEventListener('input', function() {
+            const height = this.value + 'px';
+            heightValue.textContent = height;
+            treeModel.style.height = height;
+            treeTrunk.style.height = (this.value * 0.5) + 'px';
+            treeFoliage.style.bottom = (this.value * 0.45) + 'px';
+        });
+        
+        // Управление густотой листвы
+        foliageControl.addEventListener('input', function() {
+            const foliageSize = this.value + 'px';
+            foliageValue.textContent = foliageSize;
+            treeFoliage.style.height = foliageSize;
+            treeFoliage.style.width = (this.value * 1.1) + 'px';
+        });
+        
+        // Управление толщиной ствола
+        trunkControl.addEventListener('input', function() {
+            const trunkSize = this.value + 'px';
+            trunkValue.textContent = trunkSize;
+            treeTrunk.style.width = trunkSize;
+        });
+        
+        // Управление сезонами
+        seasonButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активный класс у всех кнопок
+                seasonButtons.forEach(btn => btn.classList.remove('active'));
+                // Добавляем активный класс текущей кнопке
+                this.classList.add('active');
+                
+                const season = this.getAttribute('data-season');
+                changeSeason(season);
+            });
+        });
+        
+        // Функция изменения сезона
+        function changeSeason(season) {
+            let foliageColor, foliageShadow, trunkGradient, description;
+            
+            switch(season) {
+                case 'spring':
+                    foliageColor = 'radial-gradient(circle at 50% 0%, #aed581, #689f38, #33691e)';
+                    foliageShadow = '0 15px 30px rgba(104, 159, 56, 0.3)';
+                    trunkGradient = 'linear-gradient(to right, #8B4513, #A0522D, #8B4513)';
+                    description = '<strong>Весна:</strong> дерево пробуждается, появляются почки и первые листья. Начинается активное сокодвижение. Цветение многих видов привлекает насекомых-опылителей.';
+                    break;
+                case 'summer':
+                    foliageColor = 'radial-gradient(circle at 50% 0%, #2e7d32, #1b5e20, #0d3b0d)';
+                    foliageShadow = '0 15px 30px rgba(27, 94, 32, 0.4)';
+                    trunkGradient = 'linear-gradient(to right, #8B4513, #A0522D, #8B4513)';
+                    description = '<strong>Лето:</strong> дерево в полном расцвете, густая листва обеспечивает активный фотосинтез. Плоды начинают созревать, обеспечивая пищу животным.';
+                    break;
+                case 'autumn':
+                    foliageColor = 'radial-gradient(circle at 50% 0%, #ffb74d, #f57c00, #d84315, #8d6e63)';
+                    foliageShadow = '0 15px 30px rgba(245, 124, 0, 0.3)';
+                    trunkGradient = 'linear-gradient(to right, #8B4513, #A0522D, #8B4513)';
+                    description = '<strong>Осень:</strong> листья меняют цвет и опадают, дерево готовится к периоду покоя. Хлорофилл разрушается, обнажая каротиноиды и антоцианы.';
+                    break;
+                case 'winter':
+                    foliageColor = 'radial-gradient(circle at 50% 0%, #cfd8dc, #90a4ae, #78909c, #546e7a)';
+                    foliageShadow = '0 15px 30px rgba(144, 164, 174, 0.3)';
+                    trunkGradient = 'linear-gradient(to right, #5d4037, #795548, #5d4037)';
+                    description = '<strong>Зима:</strong> дерево в состоянии покоя, ветви голые, процессы жизнедеятельности замедлены. Накопленные питательные вещества хранятся в корнях и стволе.';
+                    break;
+            }
+            
+            treeFoliage.style.background = foliageColor;
+            treeFoliage.style.boxShadow = foliageShadow;
+            treeTrunk.style.background = trunkGradient;
+            seasonDescription.innerHTML = description;
+        }
+        
+        // Анимация диаграмм
+        function animateCharts() {
+            const chartBars = document.querySelectorAll('.chart-bar-fill');
+            chartBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+        
+        // Кнопка наверх
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Анимация элементов при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация галереи
+            const artworks = document.querySelectorAll('.artwork');
+            
+            artworks.forEach((artwork, index) => {
+                artwork.style.opacity = '0';
+                artwork.style.transform = 'translateY(30px) scale(0.95)';
+                artwork.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                
+                setTimeout(() => {
+                    artwork.style.opacity = '1';
+                    artwork.style.transform = 'translateY(0) scale(1)';
+                }, 100 + index * 150);
+            });
+            
+            // Анимация диаграмм
+            setTimeout(animateCharts, 1000);
+            
+            // Анимация карточек
+            const cards = document.querySelectorAll('.property-card, .fact-card, .type-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 500 + index * 100);
+            });
+            
+            // Параллакс эффект для заголовка
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('header');
+                header.style.transform = `translateY(${scrolled * 0.05}px)`;
+            });
+        });
+        
+        // Инициализация начального состояния
+        changeSeason('spring');
+    </script>
+</body>
+</html>
